@@ -1,0 +1,28 @@
+version: 2
+seeds:
+  - name: salesforce_accounts
+    columns:
+      - name: account_id
+        tests: [unique, not_null]
+  - name: salesforce_opportunities
+    columns:
+      - name: opportunity_id
+        tests: [unique, not_null]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('salesforce_accounts')
+              field: account_id
+      - name: stage
+        tests:
+          - accepted_values:
+              values: ["Closed Won", "Closed Lost", "Negotiation", "Proposal"]
+  - name: billing_usage_events
+    columns:
+      - name: event_id
+        tests: [unique, not_null]
+  - name: billing_invoices
+    columns:
+      - name: invoice_id
+        tests: [unique, not_null]

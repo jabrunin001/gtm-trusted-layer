@@ -1,0 +1,6 @@
+account_id,account_name,segment,loaded_at
+A1,Acme,Enterprise,2026-06-20
+A2,Globex,Enterprise,2026-06-20
+A3,Initech,MidMarket,2026-06-20
+A4,Umbrella,MidMarket,2026-06-20
+A5,Soylent,SMB,2026-06-20
