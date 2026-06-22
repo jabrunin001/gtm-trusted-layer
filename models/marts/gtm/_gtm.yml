@@ -1,0 +1,35 @@
+version: 2
+models:
+  - name: dim_account
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: account_id
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: account_name
+        data_type: varchar
+      - name: segment
+        data_type: varchar
+  - name: fct_bookings
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: account_id
+        data_type: varchar
+        tests: [not_null]
+      - name: net_new_arr
+        data_type: integer
+        tests: [not_null]
+      - name: cycle_days
+        data_type: bigint
+  - name: fct_revenue
+    config:
+      contract: {enforced: true}
+    columns:
+      - name: account_id
+        data_type: varchar
+        tests: [unique, not_null]
+      - name: recognized_amount
+        data_type: hugeint
+        tests: [not_null]
