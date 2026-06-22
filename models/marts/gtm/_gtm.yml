@@ -33,3 +33,9 @@ models:
       - name: recognized_amount
         data_type: hugeint
         tests: [not_null]
+  - name: mart_gtm_metrics
+    columns:
+      - name: metric_name
+        tests: [unique, not_null]
+      - name: metric_value
+        tests: [not_null]
