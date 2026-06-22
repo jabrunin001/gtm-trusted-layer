@@ -1,0 +1,24 @@
+name: gtm_trusted_layer
+version: "1.0.0"
+config-version: 2
+profile: gtm_trusted_layer
+model-paths: ["models"]
+seed-paths: ["seeds"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+vars:
+  inject_break: false
+models:
+  gtm_trusted_layer:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+    reference:
+      +materialized: table
+seeds:
+  gtm_trusted_layer:
+    +column_types:
+      loaded_at: date

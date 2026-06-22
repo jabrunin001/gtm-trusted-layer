@@ -1,0 +1,16 @@
+gtm_trusted_layer:
+  target: local
+  outputs:
+    local:
+      type: duckdb
+      path: gtm_trusted_layer.duckdb
+      threads: 4
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', '') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', '') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', '') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', '') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', '') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', '') }}"
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA', 'gtm') }}"

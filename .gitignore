@@ -9,3 +9,6 @@ venv/
 .env
 .DS_Store
 .superpowers/
+*.egg-info/
+.pytest_cache/
+.user.yml
