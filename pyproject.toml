@@ -1,7 +1,9 @@
 [project]
 name = "gtm-trusted-layer"
 version = "0.1.0"
-requires-python = ">=3.11"
+# dbt-core 1.8 supports Python 3.9–3.12; it fails to import on 3.13+
+# (mashumaro serialization error), so cap the upper bound explicitly.
+requires-python = ">=3.11,<3.13"
 dependencies = [
     "dbt-core>=1.8,<1.9",
     "dbt-duckdb>=1.8,<1.9",
