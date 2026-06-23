@@ -14,6 +14,13 @@ independent billing reference catches the **$300K overstatement** (1,200,000 boo
 900,000 recognized) and CI fails. That gap between *passes tests* and *is actually correct*
 is the entire point.
 
+## Dashboard
+
+`dashboard/index.html` is a self-contained **Metric Trust Console** — open it in any browser
+(no server, no build, no network). Flip the **Production ↔ Inject break** switch to watch the
+proof live: dbt stays 54/54 green while reconciliation catches the $300K gap and the
+certification count drops to 7/8. It mirrors `gtm certify` and uses the repo's real values.
+
 ## Requirements
 
 **Python 3.11 or 3.12 is required.** dbt-core 1.8 does not run on Python 3.13+ (the project
