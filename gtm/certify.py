@@ -41,9 +41,12 @@ def certify(registry: Registry, warehouse: Warehouse, as_of: date, window_days: 
             if loaded is None or loaded < cutoff:
                 fresh = False
         rec = reconcile(m.name, mart[m.name], ref[m.name], m.abs_tolerance, m.rel_tolerance)
-        reason = "" if rec.within_tolerance else f"reconciliation delta {rec.delta:+,.2f}"
+        parts = []
+        if not rec.within_tolerance:
+            parts.append(f"reconciliation delta {rec.delta:+,.2f}")
         if not fresh:
-            reason = (reason + "; stale source").lstrip("; ")
+            parts.append("stale source")
+        reason = "; ".join(parts)
         statuses.append(MetricStatus(
             metric=m.name, owning_org=m.owning_org,
             governed=True, fresh=fresh, reconciled=rec.within_tolerance,

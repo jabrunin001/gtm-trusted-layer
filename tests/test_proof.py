@@ -29,6 +29,9 @@ def test_injected_break_diverges_but_dbt_tests_pass():
     mart = _metric(con, "mart_gtm_metrics", "metric_value", "recognized_net_new_arr")
     ref = _metric(con, "ref_metric_values", "reference_value", "recognized_net_new_arr")
     con.close()
-    assert mart == 1_200_000          # re-sourced from bookings
-    assert ref == 900_000             # independent billing reference unchanged
-    assert abs(mart - ref) == 300_000 # the overstatement reconciliation will catch
+    try:
+        assert mart == 1_200_000          # re-sourced from bookings
+        assert ref == 900_000             # independent billing reference unchanged
+        assert abs(mart - ref) == 300_000 # the overstatement reconciliation will catch
+    finally:
+        _dbt("build", "--vars", '{"inject_break": false}')

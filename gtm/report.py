@@ -6,6 +6,10 @@ from gtm.registry import MetricDef
 console = Console()
 
 
+def _mark(b: bool) -> str:
+    return "[green]✓[/green]" if b else "[red]✗[/red]"
+
+
 def render_certify_table(statuses: list[MetricStatus]) -> None:
     table = Table(title="GTM Metric Certification")
     table.add_column("Metric")
@@ -17,10 +21,9 @@ def render_certify_table(statuses: list[MetricStatus]) -> None:
     table.add_column("Reference")
     table.add_column("Status")
     for s in statuses:
-        mark = lambda b: "[green]✓[/green]" if b else "[red]✗[/red]"
         status = "[green]CERTIFIED[/green]" if s.certified else f"[red]FAIL[/red] {s.reason}"
         table.add_row(
-            s.metric, s.owning_org, mark(s.governed), mark(s.fresh), mark(s.reconciled),
+            s.metric, s.owning_org, _mark(s.governed), _mark(s.fresh), _mark(s.reconciled),
             "" if s.mart_value is None else f"{s.mart_value:,.2f}",
             "" if s.reference_value is None else f"{s.reference_value:,.2f}",
             status,
@@ -31,8 +34,8 @@ def render_certify_table(statuses: list[MetricStatus]) -> None:
 def render_reconcile_detail(status: MetricStatus, metric_def: MetricDef) -> None:
     console.print(f"[bold]{status.metric}[/bold] — owned by {status.owning_org}")
     console.print(f"  source of truth : {metric_def.source_of_truth}")
-    console.print(f"  mart value      : {status.mart_value:,.2f}")
-    console.print(f"  reference value : {status.reference_value:,.2f}")
-    console.print(f"  delta           : {status.delta:+,.2f}")
+    console.print(f"  mart value      : {'N/A' if status.mart_value is None else f'{status.mart_value:,.2f}'}")
+    console.print(f"  reference value : {'N/A' if status.reference_value is None else f'{status.reference_value:,.2f}'}")
+    console.print(f"  delta           : {'N/A' if status.delta is None else f'{status.delta:+,.2f}'}")
     verdict = "within tolerance" if status.reconciled else "OUT OF TOLERANCE"
     console.print(f"  verdict         : {verdict}")
