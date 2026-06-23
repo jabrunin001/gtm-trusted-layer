@@ -49,5 +49,18 @@ def _certify_metrics():
     return _certify(load_registry(), Warehouse(), AS_OF, FRESHNESS_WINDOW_DAYS)
 
 
+@app.command()
+def anomaly(use_ollama: bool = typer.Option(False, "--use-ollama")):
+    """Flag anomalies in monthly recognized revenue (local-only)."""
+    from gtm.anomaly import detect, explain
+    series = Warehouse().monthly_recognized()
+    points = detect(series)
+    if not points:
+        typer.echo("No anomalies detected.")
+        return
+    for p in points:
+        typer.echo(explain(p, series, use_ollama=use_ollama))
+
+
 if __name__ == "__main__":
     app()
