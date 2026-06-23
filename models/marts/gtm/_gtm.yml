@@ -6,7 +6,7 @@ models:
     columns:
       - name: account_id
         data_type: varchar
-        tests: [unique, not_null]
+        data_tests: [unique, not_null]
       - name: account_name
         data_type: varchar
       - name: segment
@@ -17,10 +17,10 @@ models:
     columns:
       - name: account_id
         data_type: varchar
-        tests: [not_null]
+        data_tests: [not_null]
       - name: net_new_arr
         data_type: integer
-        tests: [not_null]
+        data_tests: [not_null]
       - name: cycle_days
         data_type: bigint
   - name: fct_revenue
@@ -29,13 +29,13 @@ models:
     columns:
       - name: account_id
         data_type: varchar
-        tests: [unique, not_null]
+        data_tests: [unique, not_null]
       - name: recognized_amount
         data_type: hugeint
-        tests: [not_null]
+        data_tests: [not_null]
   - name: mart_gtm_metrics
     columns:
       - name: metric_name
-        tests: [unique, not_null]
+        data_tests: [unique, not_null]
       - name: metric_value
-        tests: [not_null]
+        data_tests: [not_null]

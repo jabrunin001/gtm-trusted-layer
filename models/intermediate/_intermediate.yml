@@ -3,8 +3,8 @@ models:
   - name: int_bookings
     columns:
       - name: net_new_arr
-        tests: [not_null]
+        data_tests: [not_null]
   - name: int_usage_revenue
     columns:
       - name: recognized_amount
-        tests: [not_null]
+        data_tests: [not_null]

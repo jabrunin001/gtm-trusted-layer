@@ -21,6 +21,8 @@ caps `requires-python = ">=3.11,<3.13"`).
 
 ## Quickstart
 
+All commands are run from the repo root.
+
 ```bash
 python -m venv .venv && .venv/bin/python -m pip install -e ".[dev]"
 .venv/bin/dbt deps --profiles-dir .
@@ -29,6 +31,8 @@ python -m venv .venv && .venv/bin/python -m pip install -e ".[dev]"
 .venv/bin/gtm reconcile recognized_net_new_arr   # root-cause detail
 .venv/bin/gtm anomaly                        # local anomaly scan on monthly recognized revenue
 ```
+
+**Tests** (25 hermetic tests, no network required): `.venv/bin/pytest`
 
 Optional Snowflake target: `gtm certify --target prod` with `SNOWFLAKE_*` env vars set.
 

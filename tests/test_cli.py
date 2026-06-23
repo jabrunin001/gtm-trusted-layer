@@ -13,7 +13,7 @@ def test_certify_clean_exits_zero():
 def test_certify_break_exits_one():
     result = runner.invoke(app, ["certify", "--inject-break"])
     assert result.exit_code == 1
-    assert "recognized_net_new_arr" in result.stdout
+    assert "recognized_net_new_arr" in result.stdout  # appears in FAILED: line
 
 
 def test_reconcile_detail_runs():

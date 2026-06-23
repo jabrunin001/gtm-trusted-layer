@@ -3,7 +3,7 @@ from rich.table import Table
 from gtm.certify import MetricStatus
 from gtm.registry import MetricDef
 
-console = Console(width=200)
+console = Console()
 
 
 def _mark(b: bool) -> str:

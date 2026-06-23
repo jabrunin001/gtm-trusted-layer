@@ -47,7 +47,7 @@ def explain(point: AnomalyPoint, series: list[float], use_ollama: bool = False) 
     if not use_ollama:
         return deterministic
     try:
-        import ollama  # noqa: F401  (only if user has it locally)
+        import ollama  # only if user has it locally
         resp = ollama.chat(
             model="llama3",
             messages=[{"role": "user", "content": f"Explain this GTM anomaly in one sentence: {deterministic}"}],

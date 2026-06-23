@@ -30,6 +30,7 @@ def certify(
     n_ok, n_total = summary(statuses)
     typer.echo(f"{n_ok}/{n_total} metrics certified")
     if n_ok != n_total:
+        typer.echo("FAILED: " + ", ".join(s.metric for s in statuses if not s.certified))
         raise typer.Exit(code=1)
 
 

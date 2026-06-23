@@ -6,6 +6,8 @@ on:
 jobs:
   certify:
     runs-on: ubuntu-latest
+    env:
+      DBT_PROFILES_DIR: "."
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,5 +34,6 @@ jobs:
             echo "OK: reconciliation caught the injected break"
           fi
       - name: Restore clean state
+        if: always()
         run: |
           dbt build --vars '{"inject_break": false}' --profiles-dir .

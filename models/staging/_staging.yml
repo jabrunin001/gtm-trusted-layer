@@ -3,16 +3,16 @@ models:
   - name: stg_salesforce__opportunities
     columns:
       - name: opportunity_id
-        tests: [unique, not_null]
+        data_tests: [unique, not_null]
       - name: net_new_arr
-        tests: [not_null]
+        data_tests: [not_null]
   - name: stg_billing__usage_events
     columns:
       - name: event_id
-        tests: [unique, not_null]
+        data_tests: [unique, not_null]
       - name: recognized_amount
-        tests: [not_null]
+        data_tests: [not_null]
   - name: stg_billing__invoices
     columns:
       - name: invoice_id
-        tests: [unique, not_null]
+        data_tests: [unique, not_null]
