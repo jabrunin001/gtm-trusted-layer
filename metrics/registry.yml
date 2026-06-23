@@ -1,0 +1,57 @@
+metrics:
+  - name: recognized_net_new_arr
+    description: Net-new ARR recognized from actual billing usage (source of truth).
+    grain: company_period
+    source_of_truth: fct_revenue
+    owning_org: finance
+    abs_tolerance: 1.0
+    freshness_sources: [stg_billing__usage_events, stg_billing__invoices]
+  - name: gross_new_arr
+    description: Gross new ARR from Closed-Won bookings.
+    grain: company_period
+    source_of_truth: fct_bookings
+    owning_org: gtm_ops
+    abs_tolerance: 1.0
+    freshness_sources: [stg_salesforce__opportunities]
+  - name: pipeline_coverage
+    description: Open pipeline divided by quota.
+    grain: company_period
+    source_of_truth: int_pipeline
+    owning_org: gtm_ops
+    rel_tolerance: 0.0001
+    freshness_sources: [stg_salesforce__opportunities]
+  - name: win_rate
+    description: Won opps over closed opps.
+    grain: company_period
+    source_of_truth: stg_salesforce__opportunities
+    owning_org: gtm_ops
+    rel_tolerance: 0.0001
+    freshness_sources: [stg_salesforce__opportunities]
+  - name: average_sales_cycle_days
+    description: Mean days from create to close on won opps.
+    grain: company_period
+    source_of_truth: fct_bookings
+    owning_org: gtm_ops
+    rel_tolerance: 0.0001
+    freshness_sources: [stg_salesforce__opportunities]
+  - name: quota_attainment
+    description: Bookings over quota.
+    grain: company_period
+    source_of_truth: fct_bookings
+    owning_org: gtm_ops
+    rel_tolerance: 0.0001
+    freshness_sources: [stg_salesforce__opportunities]
+  - name: net_revenue_retention
+    description: Current recognized over prior recognized.
+    grain: company_period
+    source_of_truth: stg_finance__revenue_reference
+    owning_org: finance
+    rel_tolerance: 0.0001
+    freshness_sources: [stg_finance__revenue_reference]
+  - name: logo_count
+    description: Distinct won logos.
+    grain: company_period
+    source_of_truth: fct_bookings
+    owning_org: gtm_ops
+    abs_tolerance: 0.0
+    freshness_sources: [stg_salesforce__opportunities]
